@@ -1,17 +1,26 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 class Contact extends Component {
   render() {
+    //destructuring
+    const { name, email, phone } = this.props;
     return (
       <div>
-        <h4>{this.props.name}</h4>
+        <h4>{name}</h4>
         <ul>
-          <li>{this.props.email}</li>
-          <li>{this.props.phone}</li>
+          <li>{email}</li>
+          <li>{phone}</li>
         </ul>
       </div>
     );
   }
 }
+
+Contact.propTypes = {
+  name: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  phone: PropTypes.string.isRequired
+};
 
 export default Contact;
