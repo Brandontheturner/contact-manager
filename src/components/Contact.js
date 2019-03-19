@@ -2,20 +2,28 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 class Contact extends Component {
-  // static propTypes = {
-  //   name: PropTypes.string.isRequired,
-  //   email: PropTypes.string.isRequired,
-  //   phone: PropTypes.string.isRequired
-  // };
+  state = {
+    showContactInfo: true
+  };
+
   render() {
     //destructuring
-    const { name, email, phone } = this.props;
+    const { contact } = this.props;
     return (
+      //using bootstrap for card styling
       <div className="card card-body mb-3">
-        <h4>{name}</h4>
+        <h4>
+          {contact.name}
+          <i
+            onClick={() =>
+              this.setState({ showContactInfo: !this.state.showContactInfo })
+            }
+            className="fas fa-sort-down"
+          />
+        </h4>
         <ul className="list-group">
-          <li className="list-group-item">{email}</li>
-          <li className="list-group-item">{phone}</li>
+          <li className="list-group-item">{contact.email}</li>
+          <li className="list-group-item">{contact.phone}</li>
         </ul>
       </div>
     );
@@ -23,9 +31,7 @@ class Contact extends Component {
 }
 
 Contact.propTypes = {
-  name: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  phone: PropTypes.string.isRequired
+  contact: PropTypes.object.isRequired
 };
 
 export default Contact;
