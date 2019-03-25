@@ -1,22 +1,25 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Consumer } from "../context";
+import { Consumer } from "../../context";
 
 class Contact extends Component {
   state = {
     showContactInfo: false
   };
 
-  onDeleteClick = () => {};
+  onDeleteClick = (id, dispatch) => {
+    dispatch({ type: "DELETE_CONTACT", payload: id });
+  };
 
   render() {
     //destructuring
-    const { name, email, phone } = this.props.contact;
+    const { id, name, email, phone } = this.props.contact;
     const { showContactInfo } = this.state;
 
     return (
       <Consumer>
         {value => {
+          const { dispatch } = value;
           return (
             <div className="card card-body mb-3">
               <h4>
@@ -33,7 +36,7 @@ class Contact extends Component {
                 <i
                   className="fas fa-times"
                   style={{ cursor: "pointer", float: "right", color: "red" }}
-                  onClick={this.onDeleteClick.bind()}
+                  onClick={this.onDeleteClick.bind(this, id, dispatch)}
                 />
               </h4>
               {showContactInfo ? (
